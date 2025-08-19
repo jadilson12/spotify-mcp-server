@@ -1,237 +1,239 @@
 # Spotipy MCP Server
 
-Servidor MCP (Model Context Protocol) com integração Spotipy para controle de música via Spotify.
+[![CI/CD Pipeline](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/mcp-server/actions/workflows/ci.yml)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tests](https://img.shields.io/badge/tests-60%20passing-brightgreen)](https://github.com/your-username/mcp-server/actions)
 
-## 🚀 Funcionalidades
+MCP (Model Context Protocol) Server with Spotipy integration for music control via Spotify.
 
-- ✅ Controle de playback (play, pause, next, previous)
-- ✅ Ajuste de volume
-- ✅ Busca de músicas
-- ✅ Obter música atual
-- ✅ Gerenciar playlists
-- ✅ API REST completa
-- ✅ Documentação automática (Swagger)
-- ✅ Integração MCP completa com tools e resources
+## 🚀 Features
 
-## 📋 Pré-requisitos
+- ✅ Playback control (play, pause, next, previous)
+- ✅ Volume adjustment
+- ✅ Music search
+- ✅ Get current track
+- ✅ Playlist management
+- ✅ Complete REST API
+- ✅ Automatic documentation (Swagger)
+- ✅ Complete MCP integration with tools and resources
+
+## 📋 Prerequisites
 
 - Python 3.12+
-- Conta no Spotify Developer
-- Aplicação registrada no Spotify Developer Dashboard
+- Spotify Developer account
+- Registered application in Spotify Developer Dashboard
 
-## 🛠️ Instalação
+## 🛠️ Installation
 
-1. **Clone o repositório:**
+1. **Clone the repository:**
 
 ```bash
-git clone <seu-repositorio>
+git clone <your-repository>
 cd mcp-server
 ```
 
-2. **Instale as dependências:**
+2. **Install dependencies:**
 
 ```bash
 make install
 ```
 
-3. **Configure as variáveis de ambiente:**
+3. **Configure environment variables:**
 
 ```bash
 cp env.example .env
 ```
 
-Edite o arquivo `.env` com suas credenciais do Spotify:
+Edit the `.env` file with your Spotify credentials:
 
 ```env
-SPOTIFY_CLIENT_ID=seu_client_id_aqui
-SPOTIFY_CLIENT_SECRET=seu_client_secret_aqui
+SPOTIFY_CLIENT_ID=your_client_id_here
+SPOTIFY_CLIENT_SECRET=your_client_secret_here
 SPOTIFY_REDIRECT_URI=http://localhost:8888/callback
 ```
 
-## 🎵 Configuração do Spotify
+## 🎵 Spotify Configuration
 
-1. Acesse [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
-2. Crie uma nova aplicação
-3. Copie o `Client ID` e `Client Secret`
-4. Adicione `http://localhost:8888/callback` nas URLs de redirecionamento
-5. **Importante:** Configure os seguintes escopos na sua aplicação:
-   - `user-read-playback-state` - Ler estado de reprodução
-   - `user-modify-playback-state` - Controlar reprodução
-   - `user-read-currently-playing` - Música atual
-   - `playlist-read-private` - Playlists privadas
-   - `user-library-read` - Biblioteca do usuário
-   - `user-top-read` - Top artistas e músicas
-   - `user-read-recently-played` - Músicas recentes
-   - `user-follow-read` - Artistas seguidos
-   - `user-read-email` - Email do usuário
-   - `user-read-private` - Informações privadas
+1. Access [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
+2. Create a new application
+3. Copy the `Client ID` and `Client Secret`
+4. Add `http://localhost:8888/callback` to redirect URLs
+5. **Important:** Configure the following scopes in your application:
+   - `user-read-playback-state` - Read playback state
+   - `user-modify-playback-state` - Control playback
+   - `user-read-currently-playing` - Current track
+   - `playlist-read-private` - Private playlists
+   - `user-library-read` - User library
+   - `user-top-read` - Top artists and tracks
+   - `user-read-recently-played` - Recently played tracks
+   - `user-follow-read` - Followed artists
+   - `user-read-email` - User email
+   - `user-read-private` - Private information
 
-## 🚀 Uso
+## 🚀 Usage
 
-### Iniciar o servidor:
+### Start the server:
 
 ```bash
 make dev
 ```
 
-O servidor estará disponível em:
+The server will be available at:
 
 - **API**: http://localhost:8000
-- **Documentação**: http://localhost:8000/docs
+- **Documentation**: http://localhost:8000/docs
 - **Health Check**: http://localhost:8000/health
 
-## 🛠️ **Guia de Desenvolvimento**
+## 🛠️ **Development Guide**
 
-### 🔄 **Comandos Essenciais**
+### 🔄 **Essential Commands**
 
 ```bash
-# Restart completo do servidor
+# Complete server restart
 pkill -f "python.*mcp-server" && sleep 2 && make dev
 
-# Kill portas MCP (OBRIGATÓRIO antes de run-inspector)
+# Kill MCP ports (REQUIRED before run-inspector)
 lsof -ti:6274 | xargs kill -9 && lsof -ti:6277 | xargs kill -9
 
-# Verificar portas em uso
+# Check ports in use
 lsof -i:6274 && lsof -i:6277
 ```
 
-### ⚠️ **IMPORTANTE: Sempre Kill as Portas!**
+### ⚠️ **IMPORTANT: Always Kill Ports!**
 
-**ANTES de executar `make run-inspector`, SEMPRE execute:**
+**BEFORE running `make run-inspector`, ALWAYS execute:**
 
 ```bash
-# Kill portas MCP (OBRIGATÓRIO)
+# Kill MCP ports (REQUIRED)
 lsof -ti:6274 | xargs kill -9 && lsof -ti:6277 | xargs kill -9
 ```
 
-**Por que isso é necessário?**
+**Why is this necessary?**
 
-- O MCP Inspector usa as portas 6274 (UI) e 6277 (Proxy)
-- Se as portas estiverem ocupadas, o Inspector não consegue iniciar
-- Processos anteriores podem ter deixado as portas em uso
+- MCP Inspector uses ports 6274 (UI) and 6277 (Proxy)
+- If ports are occupied, Inspector cannot start
+- Previous processes may have left ports in use
 
-### 🎯 **Fluxo de Desenvolvimento**
+### 🎯 **Development Workflow**
 
-1. **Após Modificar o Código:**
-
+1. **After Modifying Code:**
 ```bash
 pkill -f "python.*mcp-server" && sleep 2 && make dev
 ```
 
-2. **Para Testar com MCP Inspector:**
-
+2. **To Test with MCP Inspector:**
 ```bash
 lsof -ti:6274 | xargs kill -9 && lsof -ti:6277 | xargs kill -9
 make run-inspector
 ```
 
-### Comandos disponíveis:
+### Available commands:
 
 ```bash
-make dev              # Iniciar servidor de desenvolvimento
-make install          # Instalar dependências
-make clean            # Limpar arquivos temporários
-make test             # Executar testes
-make lint             # Verificar qualidade do código
-make format           # Formatar código
-make run-inspector    # Executar MCP Inspector
-make help             # Mostrar ajuda
+make dev              # Start development server
+make install          # Install dependencies
+make clean            # Clean temporary files
+make test             # Run tests
+make lint             # Check code quality
+make format           # Format code
+make run-inspector    # Run MCP Inspector
+make help             # Show help
 ```
 
-## 🎵 **Funcionalidades MCP**
+## 🎵 **MCP Features**
 
-### **Tools Disponíveis:**
+### **Available Tools:**
 
-- `play_music` - Reproduzir música
-- `search_tracks` - Buscar músicas
-- `get_current_track` - Música atual
-- `get_playlists` - Listar playlists
-- `get_recommendations` - Recomendações
-- `get_user_profile` - Perfil do usuário
-- `get_devices` - Dispositivos disponíveis
-- `toggle_shuffle` - Alternar shuffle
-- `toggle_repeat` - Alternar repeat
-- `get_queue` - Fila de reprodução
-- `get_genres` - Gêneros musicais
-- `get_audio_features` - Características da música
+- `play_music` - Play music
+- `search_tracks` - Search tracks
+- `get_current_track` - Current track
+- `get_playlists` - List playlists
+- `get_recommendations` - Recommendations
+- `get_user_profile` - User profile
+- `get_devices` - Available devices
+- `get_queue` - Playback queue
+- `get_genres` - Music genres
+- `get_audio_features` - Audio characteristics
 
-### **Recursos Disponíveis:**
+### **Available Resources:**
 
-- `spotify://playback/current` - Reprodução atual
-- `spotify://playlists` - Playlists do usuário
-- `spotify://devices` - Dispositivos
-- `spotify://genres` - Gêneros
-- `spotify://profile` - Perfil do usuário
-- `spotify://playback/queue` - Fila de reprodução
+- `spotify://playback/current` - Current playback
+- `spotify://playlists` - User playlists
+- `spotify://devices` - Devices
+- `spotify://genres` - Genres
+- `spotify://profile` - User profile
+- `spotify://playback/queue` - Playback queue
 
-### **Templates de Recursos:**
+### **Resource Templates:**
 
-- `spotify://playlist/{playlist_id}` - Playlist específica
-- `spotify://track/{track_id}` - Música específica
-- `spotify://artist/{artist_id}` - Artista específico
-- `spotify://album/{album_id}` - Álbum específico
-- `spotify://search/{query}` - Resultados de busca
+- `spotify://playlist/{playlist_id}` - Specific playlist
+- `spotify://track/{track_id}` - Specific track
+- `spotify://artist/{artist_id}` - Specific artist
+- `spotify://album/{album_id}` - Specific album
+- `spotify://search/{query}` - Search results
 
 ## 📚 API Endpoints
 
-### Autenticação
+### Authentication
 
-- `POST /auth` - Autenticar com Spotify
-- `POST /auth/reauth` - Reautenticar com credenciais configuradas
+- `POST /auth` - Authenticate with Spotify
+- `POST /auth/reauth` - Re-authenticate with configured credentials
 
 ### Playback
 
-- `GET /current-track` - Obter música atual
-- `POST /play` - Tocar música
-- `POST /pause` - Pausar música
-- `POST /next` - Próxima música
-- `POST /previous` - Música anterior
-- `POST /volume/{volume}` - Ajustar volume (0-100)
-- `POST /seek/{position_ms}` - Pular para posição específica
-- `POST /shuffle` - Alternar modo shuffle
-- `POST /repeat` - Alternar modo repeat
+- `GET /current-track` - Get current track
+- `POST /play` - Play music
+- `POST /pause` - Pause music
+- `POST /next` - Next track
+- `POST /previous` - Previous track
+- `POST /volume/{volume}` - Adjust volume (0-100)
+- `POST /seek/{position_ms}` - Seek to specific position
+- `POST /shuffle` - Toggle shuffle mode
+- `POST /repeat` - Toggle repeat mode
 
-### Playlists e Álbuns
+### Playlists and Albums
 
-- `GET /playlists` - Obter playlists do usuário
-- `GET /playlist/{playlist_id}` - Obter músicas de uma playlist
-- `GET /albums` - Obter álbuns salvos do usuário
-- `GET /tracks` - Obter músicas salvas do usuário
+- `GET /playlists` - Get user playlists
+- `GET /playlist/{playlist_id}` - Get playlist tracks
+- `GET /albums` - Get user saved albums
+- `GET /tracks` - Get user saved tracks
 
-### Artistas e Top Tracks
+### Artists and Top Tracks
 
-- `GET /artists` - Obter artistas favoritos do usuário
-- `GET /tracks/top` - Obter músicas mais tocadas
+- `GET /artists` - Get user favorite artists
+- `GET /tracks/top` - Get most played tracks
 
-### Fila de Reprodução
+### Playback Queue
 
-- `GET /queue` - Obter fila de reprodução atual
-- `POST /queue/add` - Adicionar música à fila
+- `GET /queue` - Get current playback queue
+- `POST /queue/add` - Add track to queue
 
-### Dispositivos
+### Devices
 
-- `GET /devices` - Obter dispositivos disponíveis
-- `POST /devices/{device_id}/transfer` - Transferir playback
+- `GET /devices` - Get available devices
+- `POST /devices/{device_id}/transfer` - Transfer playback
 
-### Busca e Recomendações
+### Search and Recommendations
 
-- `GET /search/{query}` - Buscar músicas
-- `GET /recommendations` - Obter recomendações personalizadas
-- `GET /genres` - Obter gêneros musicais disponíveis
+- `GET /search/{query}` - Search tracks
+- `GET /recommendations` - Get personalized recommendations
+- `GET /genres` - Get available music genres
 
-### Usuário e Análise
+### User and Analysis
 
-- `GET /user/profile` - Obter perfil do usuário
-- `GET /audio-features/{track_id}` - Obter características de áudio
+- `GET /user/profile` - Get user profile
+- `GET /audio-features/{track_id}` - Get audio features
 
-### Sistema
+### System
 
-- `GET /` - Status do servidor
-- `GET /health` - Verificação de saúde
+- `GET /` - Server status
+- `GET /health` - Health check
 
-## 🔧 Exemplos de Uso
+## 🔧 Usage Examples
 
-### Tocar uma música específica:
+### Play a specific track:
 
 ```bash
 curl -X POST "http://localhost:8000/play" \
@@ -239,164 +241,227 @@ curl -X POST "http://localhost:8000/play" \
   -d '{"track_uri": "spotify:track:4iV5W9uYEdYUVa79Axb7Rh"}'
 ```
 
-### Buscar músicas:
+### Search tracks:
 
 ```bash
 curl "http://localhost:8000/search/bohemian%20rhapsody?limit=5"
 ```
 
-### Ajustar volume:
+### Adjust volume:
 
 ```bash
 curl -X POST "http://localhost:8000/volume/50"
 ```
 
-### Obter música atual:
+### Get current track:
 
 ```bash
 curl "http://localhost:8000/current-track"
 ```
 
-### Obter playlists do usuário:
+### Get user playlists:
 
 ```bash
 curl "http://localhost:8000/playlists"
 ```
 
-### Obter músicas de uma playlist específica:
+### Get tracks from a specific playlist:
 
 ```bash
 curl "http://localhost:8000/playlist/37i9dQZF1DXcBWIGoYBM5M"
 ```
 
-### Obter músicas salvas:
+### Get saved tracks:
 
 ```bash
 curl "http://localhost:8000/tracks"
 ```
 
-### Obter artistas favoritos:
+### Get favorite artists:
 
 ```bash
 curl "http://localhost:8000/artists"
 ```
 
-### Obter recomendações baseadas em artistas:
+### Get recommendations based on artists:
 
 ```bash
 curl "http://localhost:8000/recommendations?seed_artists=4gzpq5DPGxSnKTe4SA8HAU&limit=10"
 ```
 
-### Alternar shuffle:
+### Toggle shuffle:
 
 ```bash
 curl -X POST "http://localhost:8000/shuffle"
 ```
 
-### Adicionar música à fila:
+### Add track to queue:
 
 ```bash
 curl -X POST "http://localhost:8000/queue/add?track_uri=spotify:track:4iV5W9uYEdYUVa79Axb7Rh"
 ```
 
-### Obter dispositivos disponíveis:
+### Get available devices:
 
 ```bash
 curl "http://localhost:8000/devices"
 ```
 
-### Pular para posição específica (30 segundos):
+### Seek to specific position (30 seconds):
 
 ```bash
 curl -X POST "http://localhost:8000/seek/30000"
 ```
 
-### Reautenticar com Spotify:
+### Re-authenticate with Spotify:
 
 ```bash
 curl -X POST "http://localhost:8000/auth/reauth"
 ```
 
-## 🧪 Testes
+## 🚀 CI/CD Pipeline
 
-### 📊 **Status dos Testes**
+### 📊 **Pipeline Status**
 
-✅ **60 testes PASSANDO** | ⏱️ **~0.38s** | 🔧 **100% Funcional**
+Our CI/CD pipeline ensures code quality and security:
 
-### 🚀 **Executar Testes**
+- ✅ **Tests**: 60 tests passing on Python 3.12 & 3.13
+- ✅ **Linting**: Code quality checks with flake8
+- ✅ **Formatting**: Black and isort formatting validation
+- ✅ **Security**: Secrets detection and .env file validation
+- ✅ **Build**: Package building and artifact generation
+
+### 🔄 **Pipeline Jobs**
+
+| Job | Description | Status |
+|-----|-------------|--------|
+| **Test** | Run all tests on Python 3.12 & 3.13 | ![Test](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=test) |
+| **Lint** | Code quality and formatting checks | ![Lint](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=lint) |
+| **Security** | Secrets detection and security validation | ![Security](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=security) |
+| **Build** | Package building and distribution | ![Build](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=build) |
+
+### 🛡️ **Security Checks**
+
+The pipeline includes comprehensive security validation:
+
+- **🔍 TruffleHog**: Advanced secret scanner for detecting credentials
+- **🕵️ detect-secrets**: Multi-pattern secret detection with baseline
+- **🔐 Pattern Matching**: Custom regex patterns for sensitive data
+- **📁 File Validation**: Checks for committed sensitive files (.env, .key, .pem)
+- **⚙️ Gitignore Validation**: Ensures sensitive file patterns are ignored
+- **🌐 URL Scanning**: Detects hardcoded cloud service URLs
+- **📊 Security Reports**: Generates detailed security scan artifacts
+
+**Protected Patterns:**
+- API keys and tokens
+- Passwords and secrets
+- Base64/Hex encoded strings
+- AWS, Google, Azure credentials
+- Private keys and certificates
+- Spotify client credentials
+
+### 📋 **Local Pipeline Testing**
+
+Test the pipeline locally before pushing:
 
 ```bash
-# Executar todos os testes (recomendado)
+# Run all pipeline checks locally
+make test-pytest    # Tests
+make lint          # Linting
+make format        # Formatting
+make security      # Security checks
+```
+
+### 🔐 **Security Commands**
+
+```bash
+# Run security checks
+make security       # Basic security validation
+
+# Full security scan (requires tools)
+pip install detect-secrets truffleHog3
+detect-secrets scan --all-files
+trufflehog3 --format json .
+```
+
+## 🧪 Tests
+
+✅ **60 tests PASSING** | ⏱️ **~0.38s** | 🔧 **100% Functional**
+
+### 🚀 **Run Tests**
+
+```bash
+# Run all tests (recommended)
 make test-pytest
 
-# Ou usar pytest diretamente
+# Or use pytest directly
 python -m pytest tests/ -v --tb=short --color=yes
 ```
 
-### 📋 **Cobertura de Testes**
+### 📋 **Test Coverage**
 
-#### 🔧 **Testes de Tools MCP (36 testes)**
-- ✅ Controle de playback (`play_music`, `pause_music`, `next_track`, `previous_track`)
-- ✅ Gerenciamento de volume (`set_volume`)
-- ✅ Busca e descoberta (`search_tracks`, `search_artists`, `search_albums`, `search_playlists`)
-- ✅ Playlists e álbuns (`get_playlists`, `get_playlist_tracks`, `get_album_tracks`)
-- ✅ Perfil e preferências (`get_user_profile`, `get_top_tracks`, `get_top_artists`)
-- ✅ Biblioteca pessoal (`get_saved_tracks`, `get_saved_albums`, `get_followed_artists`)
-- ✅ Dispositivos e fila (`get_devices`, `get_queue`, `add_to_queue`)
-- ✅ Recomendações (`get_recommendations`, `get_genres`, `get_audio_features`)
-- ✅ Navegação (`skip_to_next`, `skip_to_previous`, `seek_to_position`)
-- ✅ Histórico (`get_recently_played`)
-- ✅ Artistas relacionados (`get_related_artists`, `get_artist_top_tracks`, `get_artist_albums`)
+#### 🔧 **MCP Tools Tests (36 tests)**
+- ✅ Playback control (`play_music`, `pause_music`, `next_track`, `previous_track`)
+- ✅ Volume management (`set_volume`)
+- ✅ Search and discovery (`search_tracks`, `search_artists`, `search_albums`, `search_playlists`)
+- ✅ Playlists and albums (`get_playlists`, `get_playlist_tracks`, `get_album_tracks`)
+- ✅ Profile and preferences (`get_user_profile`, `get_top_tracks`, `get_top_artists`)
+- ✅ Personal library (`get_saved_tracks`, `get_saved_albums`, `get_followed_artists`)
+- ✅ Devices and queue (`get_devices`, `get_queue`, `add_to_queue`)
+- ✅ Recommendations (`get_recommendations`, `get_genres`, `get_audio_features`)
+- ✅ Navigation (`skip_to_next`, `skip_to_previous`, `seek_to_position`)
+- ✅ History (`get_recently_played`)
+- ✅ Related artists (`get_related_artists`, `get_artist_top_tracks`, `get_artist_albums`)
 
-#### 💬 **Testes de Prompts MCP (6 testes)**
-- ✅ `spotify_assistant` - Assistente musical inteligente
-- ✅ `spotify_usage_guide` - Guia de uso das funcionalidades
-- ✅ `spotify_troubleshooting` - Solução de problemas
+#### 💬 **MCP Prompts Tests (6 tests)**
+- ✅ `spotify_assistant` - Intelligent music assistant
+- ✅ `spotify_usage_guide` - Feature usage guide
+- ✅ `spotify_troubleshooting` - Problem solving
 
-#### 📚 **Testes de Resources MCP (12 testes)**
-- ✅ `spotify://playback/current` - Estado atual de reprodução
-- ✅ `spotify://playlists/user` - Playlists do usuário
-- ✅ `spotify://devices/available` - Dispositivos disponíveis
-- ✅ `spotify://genres/available` - Gêneros musicais
-- ✅ `spotify://user/profile` - Perfil do usuário
-- ✅ `spotify://playback/queue` - Fila de reprodução
-- ✅ `spotify://user/top-tracks` - Top músicas
-- ✅ `spotify://user/top-artists` - Top artistas
-- ✅ `spotify://user/recently-played` - Reproduções recentes
-- ✅ `spotify://user/saved-tracks` - Músicas salvas
-- ✅ `spotify://user/saved-albums` - Álbuns salvos
-- ✅ `spotify://user/followed-artists` - Artistas seguidos
+#### 📚 **MCP Resources Tests (12 tests)**
+- ✅ `spotify://playback/current` - Current playback state
+- ✅ `spotify://playlists/user` - User playlists
+- ✅ `spotify://devices/available` - Available devices
+- ✅ `spotify://genres/available` - Music genres
+- ✅ `spotify://user/profile` - User profile
+- ✅ `spotify://playback/queue` - Playback queue
+- ✅ `spotify://user/top-tracks` - Top tracks
+- ✅ `spotify://user/top-artists` - Top artists
+- ✅ `spotify://user/recently-played` - Recently played
+- ✅ `spotify://user/saved-tracks` - Saved tracks
+- ✅ `spotify://user/saved-albums` - Saved albums
+- ✅ `spotify://user/followed-artists` - Followed artists
 
-#### 🔧 **Testes de Funcionalidade (3 testes)**
-- ✅ Estrutura correta das tools
-- ✅ Descrições válidas em todas as tools
-- ✅ Tratamento de erros implementado
+#### 🔧 **Functionality Tests (3 tests)**
+- ✅ Correct tool structure
+- ✅ Valid descriptions in all tools
+- ✅ Error handling implemented
 
-#### 📊 **Testes de Validação (2 testes)**
-- ✅ Validação de requisições de volume
-- ✅ Validação de requisições de busca
+#### 📊 **Validation Tests (2 tests)**
+- ✅ Volume request validation
+- ✅ Search request validation
 
-#### 🔗 **Teste de Integração (1 teste)**
-- ✅ Completude do servidor (tools, prompts, resources)
+#### 🔗 **Integration Test (1 test)**
+- ✅ Server completeness (tools, prompts, resources)
 
-### 🎯 **Comandos de Teste Disponíveis**
+### 🎯 **Available Test Commands**
 
 ```bash
-# Executar todos os testes
-make test-pytest           # Usando pytest (recomendado)
+# Run all tests
+make test-pytest           # Using pytest (recommended)
 
-# Testes específicos (futuros)
-make test-tools            # Testes de tools apenas
-make test-prompts          # Testes de prompts apenas  
-make test-resources        # Testes de resources apenas
-make test-integration      # Testes de integração apenas
-make test-coverage         # Verificar cobertura
+# Specific tests (future)
+make test-tools            # Tools tests only
+make test-prompts          # Prompts tests only  
+make test-resources        # Resources tests only
+make test-integration      # Integration tests only
+make test-coverage         # Check coverage
 
-# Teste com saída detalhada
+# Test with detailed output
 python -m pytest tests/ -v -s --tb=long
 ```
 
-### 📈 **Resultados dos Últimos Testes**
+### 📈 **Latest Test Results**
 
 ```
 ===================================== test session starts =====================================
@@ -414,143 +479,187 @@ TestIntegration ✅ (1/1)
 ===================================== 60 passed in 0.38s ======================================
 ```
 
-### 🔍 **Estrutura dos Testes**
+### 🔍 **Test Structure**
 
 ```
 tests/
-├── test_main.py          # Todos os testes do servidor MCP
-├── __init__.py           # Inicialização do módulo
-└── README.md            # Documentação dos testes
+├── test_main.py          # All MCP server tests
+├── __init__.py           # Module initialization
+└── README.md            # Test documentation
 ```
 
-### 🧪 **Como Adicionar Novos Testes**
+### 🧪 **How to Add New Tests**
 
-1. **Para nova tool:**
+1. **For new tool:**
 ```python
 @pytest.mark.asyncio
-async def test_nova_tool_exists(self):
-    """Testa se a nova tool existe"""
+async def test_new_tool_exists(self):
+    """Test if new tool exists"""
     tools = await app.get_tools()
-    assert 'nova_tool' in tools
+    assert 'new_tool' in tools
 ```
 
-2. **Para novo resource:**
+2. **For new resource:**
 ```python
 @pytest.mark.asyncio
-async def test_novo_resource_exists(self):
-    """Testa se o novo resource existe"""
+async def test_new_resource_exists(self):
+    """Test if new resource exists"""
     resources = await app.get_resources()
-    assert 'spotify://novo/resource' in resources
+    assert 'spotify://new/resource' in resources
 ```
 
-### ⚠️ **Importante para Testes**
+### ⚠️ **Important for Tests**
 
-- **SEMPRE** execute os testes após modificar o código
-- Use `make test-pytest` para execução rápida e confiável
-- Testes não requerem autenticação real do Spotify
-- Testes focam na estrutura e disponibilidade das funcionalidades
+- **ALWAYS** run tests after modifying code
+- Use `make test-pytest` for fast and reliable execution
+- Tests don't require real Spotify authentication
+- Tests focus on structure and feature availability
 
-## 🔍 Linting e Formatação
+## 🔍 Linting and Formatting
 
 ```bash
-make lint    # Verificar qualidade do código
-make format  # Formatar código automaticamente
+make lint    # Check code quality
+make format  # Format code automatically
 ```
 
-## 📝 Estrutura do Projeto
+## 📝 Project Structure
 
 ```
 mcp-server/
 ├── src/
-│   ├── mcp-server.py    # Servidor MCP principal
-│   ├── service.py       # Lógica do Spotify
-│   ├── server.py        # API FastAPI
-│   └── config.py        # Configurações
-├── tests/               # Testes
-├── makefile             # Comandos de desenvolvimento
-├── pyproject.toml       # Configurações do projeto
-├── mcp-config.json      # Config do MCP Inspector
-├── env.example          # Exemplo de variáveis de ambiente
-└── README.md           # Este arquivo
+│   ├── mcp-server.py    # Main MCP server
+│   ├── service.py       # Spotify logic
+│   ├── server.py        # FastAPI server
+│   └── config.py        # Configuration
+├── tests/               # Tests
+├── makefile             # Development commands
+├── pyproject.toml       # Project configuration
+├── mcp-config.json      # MCP Inspector config
+├── env.example          # Environment variables example
+└── README.md           # This file
 ```
 
-## ⚠️ **Problemas Comuns**
+## ⚠️ **Common Issues**
 
-### **Erro: "PORT IS IN USE"**
+### **Error: "PORT IS IN USE"**
 
 ```bash
-# Solução rápida
+# Quick solution
 lsof -ti:6274 | xargs kill -9
 lsof -ti:6277 | xargs kill -9
 ```
 
-### **Erro: "ModuleNotFoundError"**
+### **Error: "ModuleNotFoundError"**
 
 ```bash
-# Reinstalar dependências
+# Reinstall dependencies
 make install
 ```
 
-### **Servidor não responde**
+### **Server not responding**
 
 ```bash
-# Restart completo
+# Complete restart
 pkill -f "python.*mcp-server" && sleep 2 && make dev
 ```
 
-### **Erro 403 - Permissão Insuficiente**
+### **Error 403 - Insufficient Permission**
 
-Se você receber erro 403 com mensagem "Insufficient client scope":
+If you receive error 403 with message "Insufficient client scope":
 
-1. Verifique se todos os escopos necessários estão configurados
-2. Reautentique com o Spotify usando o endpoint `/auth`
-3. Certifique-se de que aceitou todas as permissões solicitadas
+1. Verify all required scopes are configured
+2. Re-authenticate with Spotify using `/auth` endpoint
+3. Make sure you accepted all requested permissions
 
-### **Endpoints que Requerem Permissões Específicas**
+### **Endpoints Requiring Specific Permissions**
 
-- `/artists` e `/tracks/top` - Requerem `user-top-read`
-- `/recommendations` - Requer pelo menos um seed válido
-- `/user/profile` - Requer `user-read-email` e `user-read-private`
+- `/artists` and `/tracks/top` - Require `user-top-read`
+- `/recommendations` - Require at least one valid seed
+- `/user/profile` - Require `user-read-email` and `user-read-private`
 
-### **Problemas Conhecidos**
+### **Known Issues**
 
-- **Recomendações (404)**: A API de recomendações pode retornar 404 em alguns casos. Isso pode ser devido a:
-  - Problemas temporários da API do Spotify
-  - Seeds inválidos ou não encontrados
-  - Problemas de autenticação
-- **Solução**: Use o endpoint `/auth/reauth` para reautenticar se necessário
+- **Recommendations (404)**: The recommendations API may return 404 in some cases. This can be due to:
+  - Temporary Spotify API issues
+  - Invalid or not found seeds
+  - Authentication problems
+- **Solution**: Use `/auth/reauth` endpoint to re-authenticate if necessary
 
-## 🔧 **Dicas Importantes**
+## 🔧 **Important Tips**
 
-1. **SEMPRE** restart o servidor após modificar `mcp-server.py`
-2. **SEMPRE** kill as portas antes de executar o Inspector (6274 e 6277)
-3. **SEMPRE** verifique se as portas estão livres antes de executar `make run-inspector`
-4. **Verifique os logs** para identificar problemas
-5. **Use `make dev`** para desenvolvimento local
-6. **Mantenha o `.env`** configurado corretamente
+1. **ALWAYS** restart server after modifying `mcp-server.py`
+2. **ALWAYS** kill ports before running Inspector (6274 and 6277)
+3. **ALWAYS** verify ports are free before running `make run-inspector`
+4. **Check logs** to identify problems
+5. **Use `make dev`** for local development
+6. **Keep `.env`** properly configured
 
-## 🤝 Contribuição
+## 🤝 Contributing
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+We welcome contributions! Please follow these steps:
 
-## 📄 Licença
+### 🚀 **Development Workflow**
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+1. **Fork the project**
+2. **Create a feature branch:**
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. **Make your changes and test locally:**
+   ```bash
+   make test-pytest    # Run tests
+   make lint          # Check code quality
+   make format        # Format code
+   ```
+4. **Commit your changes:**
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
+5. **Push to your branch:**
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+6. **Open a Pull Request**
 
-## 🆘 Suporte
+### ✅ **CI/CD Requirements**
 
-Se você encontrar algum problema ou tiver dúvidas:
+All contributions must pass our CI/CD pipeline:
 
-1. Verifique se as credenciais do Spotify estão corretas
-2. Certifique-se de que o Spotify está rodando em algum dispositivo
-3. Verifique os logs do servidor para mais detalhes
-4. Abra uma issue no repositório
+- **Tests**: All 60 tests must pass
+- **Linting**: Code must pass flake8 checks
+- **Formatting**: Code must be properly formatted with Black
+- **Security**: No secrets or sensitive files committed
+- **Build**: Package must build successfully
 
-## 🔗 Links Úteis
+### 🛡️ **Security Guidelines**
+
+- **Never commit** `.env` files or credentials
+- **Use placeholders** in examples (e.g., `your_client_id_here`)
+- **Follow** the security checklist in `SECURITY.md`
+- **Test locally** before pushing
+
+### 📋 **Code Quality Standards**
+
+- **Python 3.12+** compatibility
+- **Type hints** for all functions
+- **Docstrings** for all public functions
+- **Error handling** for all external API calls
+- **Tests** for new functionality
+
+## 📄 License
+
+This project is under MIT license. See the `LICENSE` file for more details.
+
+## 🆘 Support
+
+If you encounter any problems or have questions:
+
+1. Check if Spotify credentials are correct
+2. Make sure Spotify is running on some device
+3. Check server logs for more details
+4. Open an issue in the repository
+
+## 🔗 Useful Links
 
 - [Spotipy Documentation](https://spotipy.readthedocs.io/)
 - [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
@@ -559,4 +668,4 @@ Se você encontrar algum problema ou tiver dúvidas:
 
 ---
 
-**🎵 Música é vida! Vamos fazer um servidor MCP incrível! 🚀**
+**🎵 Music is life! Let's make an amazing MCP server! 🚀**

@@ -4,6 +4,7 @@ Configurações centralizadas do projeto
 
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 # Diretório base do projeto (raiz de mcp-server), independente do CWD

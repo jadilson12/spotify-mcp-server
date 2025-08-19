@@ -15,6 +15,20 @@ install-inspector:
 	@echo "🔧 Instalando MCP Inspector..."
 	npm install -g @modelcontextprotocol/inspector
 
+# Verificações de segurança
+security:
+	@echo "🔒 Executando verificações de segurança..."
+	@echo "🔍 Verificando padrões sensíveis..."
+	@if grep -rE "password\s*=\s*['\"][^'\"]{3,}" . \
+		--exclude-dir=.venv --exclude-dir=__pycache__ --exclude-dir=.git \
+		--exclude="*.pyc" --exclude="*.log" | \
+		grep -v "your_client_id_here\|example\|placeholder"; then \
+		echo "❌ Possível senha encontrada!"; exit 1; \
+	else echo "✅ Nenhuma senha encontrada"; fi
+	@echo "🔍 Verificando arquivos .env..."
+	@if [ -f ".env" ]; then echo "❌ Arquivo .env encontrado!"; exit 1; else echo "✅ Nenhum arquivo .env encontrado"; fi
+	@echo "✅ Verificações de segurança concluídas"
+
 # Limpar cache e arquivos temporários
 clean:
 	@echo "🧹 Limpando arquivos temporários..."
@@ -26,6 +40,7 @@ clean:
 	rm -rf dist/
 	rm -rf .coverage
 	rm -rf htmlcov/
+	rm -f trufflehog_results.json security_report.txt
 
 # Executar testes
 test:
@@ -62,14 +77,14 @@ test-pytest:
 # Verificar linting
 lint:
 	@echo "🔍 Verificando código..."
-	flake8 src/ server/ service/ tests/
-	black --check src/ server/ service/ tests/
+	flake8 src/ tests/
+	black --check src/ tests/
 
 # Formatar código
 format:
 	@echo "✨ Formatando código..."
-	black src/ server/ service/ tests/
-	isort src/ server/ service/ tests/
+	black src/ tests/
+	isort src/ tests/
 
 # Iniciar servidor FastAPI
 api:
@@ -177,6 +192,7 @@ help:
 	@echo "  make run-inspector  - Executar MCP Inspector localmente"
 	@echo "  make install-inspector - Instalar MCP Inspector"
 	@echo "  make install    - Instalar dependências"
+	@echo "  make security   - Executar verificações de segurança"
 	@echo "  make clean      - Limpar arquivos temporários"
 	@echo "  make lint       - Verificar qualidade do código"
 	@echo "  make format     - Formatar código"

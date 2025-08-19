@@ -177,4 +177,19 @@ Desktop.ini
 logs/
 .spotify_token_cache
 
+# Security - Sensitive files
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa
+id_dsa
+credentials.json
+service-account.json
+
+# Security tools output
+trufflehog_results.json
+security_report.txt
+
 .cursorrules
