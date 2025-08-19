@@ -190,6 +190,7 @@ service-account.json
 
 # Security tools output
 trufflehog_results.json
+trufflehog_test.json
 security_report.txt
 
 .cursorrules
