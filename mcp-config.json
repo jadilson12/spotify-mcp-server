@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "spotipy": {
+      "command": "python",
+      "args": [
+        "main.py"
+      ],
+      "env": {
+        "CAPTURE_STDOUT": "false"
+      }
+    }
+  }
+}
