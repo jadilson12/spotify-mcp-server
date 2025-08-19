@@ -304,7 +304,6 @@ jobs:
         path: |
           trufflehog_results.json
           security_report.txt
-          .secrets.baseline
         if-no-files-found: ignore
 
   build:
