@@ -109,7 +109,7 @@ test-inspector:
 # Executar MCP Inspector localmente
 run-inspector:
 	@echo "🚀 Executando MCP Inspector..."
-	npx @modelcontextprotocol/inspector --config mcp-config.json
+	npx @modelcontextprotocol/inspector
 
 # Iniciar servidor MCP e Inspector (em background)
 dev-full:

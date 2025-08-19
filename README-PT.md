@@ -336,6 +336,7 @@ python -m pytest tests/ -v --tb=short --color=yes
 ### 📋 **Cobertura de Testes**
 
 #### 🔧 **Testes de Tools MCP (36 testes)**
+
 - ✅ Controle de playback (`play_music`, `pause_music`, `next_track`, `previous_track`)
 - ✅ Gerenciamento de volume (`set_volume`)
 - ✅ Busca e descoberta (`search_tracks`, `search_artists`, `search_albums`, `search_playlists`)
@@ -349,11 +350,13 @@ python -m pytest tests/ -v --tb=short --color=yes
 - ✅ Artistas relacionados (`get_related_artists`, `get_artist_top_tracks`, `get_artist_albums`)
 
 #### 💬 **Testes de Prompts MCP (6 testes)**
+
 - ✅ `spotify_assistant` - Assistente musical inteligente
 - ✅ `spotify_usage_guide` - Guia de uso das funcionalidades
 - ✅ `spotify_troubleshooting` - Solução de problemas
 
 #### 📚 **Testes de Resources MCP (12 testes)**
+
 - ✅ `spotify://playback/current` - Estado atual de reprodução
 - ✅ `spotify://playlists/user` - Playlists do usuário
 - ✅ `spotify://devices/available` - Dispositivos disponíveis
@@ -368,15 +371,18 @@ python -m pytest tests/ -v --tb=short --color=yes
 - ✅ `spotify://user/followed-artists` - Artistas seguidos
 
 #### 🔧 **Testes de Funcionalidade (3 testes)**
+
 - ✅ Estrutura correta das tools
 - ✅ Descrições válidas em todas as tools
 - ✅ Tratamento de erros implementado
 
 #### 📊 **Testes de Validação (2 testes)**
+
 - ✅ Validação de requisições de volume
 - ✅ Validação de requisições de busca
 
 #### 🔗 **Teste de Integração (1 teste)**
+
 - ✅ Completude do servidor (tools, prompts, resources)
 
 ### 🎯 **Comandos de Teste Disponíveis**
@@ -387,7 +393,7 @@ make test-pytest           # Usando pytest (recomendado)
 
 # Testes específicos (futuros)
 make test-tools            # Testes de tools apenas
-make test-prompts          # Testes de prompts apenas  
+make test-prompts          # Testes de prompts apenas
 make test-resources        # Testes de resources apenas
 make test-integration      # Testes de integração apenas
 make test-coverage         # Verificar cobertura
@@ -403,7 +409,7 @@ python -m pytest tests/ -v -s --tb=long
 collected 60 items
 
 TestMCPServerBasics ✅ (4/4)
-TestMCPTools ✅ (36/36)  
+TestMCPTools ✅ (36/36)
 TestMCPPrompts ✅ (6/6)
 TestMCPResources ✅ (12/12)
 TestToolFunctionality ✅ (2/2)
@@ -426,6 +432,7 @@ tests/
 ### 🧪 **Como Adicionar Novos Testes**
 
 1. **Para nova tool:**
+
 ```python
 @pytest.mark.asyncio
 async def test_nova_tool_exists(self):
@@ -435,6 +442,7 @@ async def test_nova_tool_exists(self):
 ```
 
 2. **Para novo resource:**
+
 ```python
 @pytest.mark.asyncio
 async def test_novo_resource_exists(self):
@@ -469,7 +477,7 @@ mcp-server/
 ├── tests/               # Testes
 ├── makefile             # Comandos de desenvolvimento
 ├── pyproject.toml       # Configurações do projeto
-├── mcp-config.json      # Config do MCP Inspector
+
 ├── env.example          # Exemplo de variáveis de ambiente
 └── README.md           # Este arquivo
 ```

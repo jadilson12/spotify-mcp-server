@@ -119,11 +119,13 @@ lsof -ti:6274 | xargs kill -9 && lsof -ti:6277 | xargs kill -9
 ### 🎯 **Development Workflow**
 
 1. **After Modifying Code:**
+
 ```bash
 pkill -f "python.*mcp-server" && sleep 2 && make dev
 ```
 
 2. **To Test with MCP Inspector:**
+
 ```bash
 lsof -ti:6274 | xargs kill -9 && lsof -ti:6277 | xargs kill -9
 make run-inspector
@@ -333,12 +335,12 @@ Our CI/CD pipeline ensures code quality and security:
 
 ### 🔄 **Pipeline Jobs**
 
-| Job | Description | Status |
-|-----|-------------|--------|
-| **Test** | Run all tests on Python 3.12 & 3.13 | ![Test](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=test) |
-| **Lint** | Code quality and formatting checks | ![Lint](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=lint) |
+| Job          | Description                               | Status                                                                                                   |
+| ------------ | ----------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Test**     | Run all tests on Python 3.12 & 3.13       | ![Test](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=test)         |
+| **Lint**     | Code quality and formatting checks        | ![Lint](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=lint)         |
 | **Security** | Secrets detection and security validation | ![Security](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=security) |
-| **Build** | Package building and distribution | ![Build](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=build) |
+| **Build**    | Package building and distribution         | ![Build](https://github.com/your-username/mcp-server/actions/workflows/ci.yml/badge.svg?job=build)       |
 
 ### 🛡️ **Security Checks**
 
@@ -353,6 +355,7 @@ The pipeline includes comprehensive security validation:
 - **📊 Security Reports**: Generates detailed security scan artifacts
 
 **Protected Patterns:**
+
 - API keys and tokens
 - Passwords and secrets
 - Base64/Hex encoded strings
@@ -401,6 +404,7 @@ python -m pytest tests/ -v --tb=short --color=yes
 ### 📋 **Test Coverage**
 
 #### 🔧 **MCP Tools Tests (36 tests)**
+
 - ✅ Playback control (`play_music`, `pause_music`, `next_track`, `previous_track`)
 - ✅ Volume management (`set_volume`)
 - ✅ Search and discovery (`search_tracks`, `search_artists`, `search_albums`, `search_playlists`)
@@ -414,11 +418,13 @@ python -m pytest tests/ -v --tb=short --color=yes
 - ✅ Related artists (`get_related_artists`, `get_artist_top_tracks`, `get_artist_albums`)
 
 #### 💬 **MCP Prompts Tests (6 tests)**
+
 - ✅ `spotify_assistant` - Intelligent music assistant
 - ✅ `spotify_usage_guide` - Feature usage guide
 - ✅ `spotify_troubleshooting` - Problem solving
 
 #### 📚 **MCP Resources Tests (12 tests)**
+
 - ✅ `spotify://playback/current` - Current playback state
 - ✅ `spotify://playlists/user` - User playlists
 - ✅ `spotify://devices/available` - Available devices
@@ -433,15 +439,18 @@ python -m pytest tests/ -v --tb=short --color=yes
 - ✅ `spotify://user/followed-artists` - Followed artists
 
 #### 🔧 **Functionality Tests (3 tests)**
+
 - ✅ Correct tool structure
 - ✅ Valid descriptions in all tools
 - ✅ Error handling implemented
 
 #### 📊 **Validation Tests (2 tests)**
+
 - ✅ Volume request validation
 - ✅ Search request validation
 
 #### 🔗 **Integration Test (1 test)**
+
 - ✅ Server completeness (tools, prompts, resources)
 
 ### 🎯 **Available Test Commands**
@@ -452,7 +461,7 @@ make test-pytest           # Using pytest (recommended)
 
 # Specific tests (future)
 make test-tools            # Tools tests only
-make test-prompts          # Prompts tests only  
+make test-prompts          # Prompts tests only
 make test-resources        # Resources tests only
 make test-integration      # Integration tests only
 make test-coverage         # Check coverage
@@ -468,7 +477,7 @@ python -m pytest tests/ -v -s --tb=long
 collected 60 items
 
 TestMCPServerBasics ✅ (4/4)
-TestMCPTools ✅ (36/36)  
+TestMCPTools ✅ (36/36)
 TestMCPPrompts ✅ (6/6)
 TestMCPResources ✅ (12/12)
 TestToolFunctionality ✅ (2/2)
@@ -491,6 +500,7 @@ tests/
 ### 🧪 **How to Add New Tests**
 
 1. **For new tool:**
+
 ```python
 @pytest.mark.asyncio
 async def test_new_tool_exists(self):
@@ -500,6 +510,7 @@ async def test_new_tool_exists(self):
 ```
 
 2. **For new resource:**
+
 ```python
 @pytest.mark.asyncio
 async def test_new_resource_exists(self):
@@ -534,7 +545,7 @@ mcp-server/
 ├── tests/               # Tests
 ├── makefile             # Development commands
 ├── pyproject.toml       # Project configuration
-├── mcp-config.json      # MCP Inspector config
+
 ├── env.example          # Environment variables example
 └── README.md           # This file
 ```
