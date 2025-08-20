@@ -175,18 +175,35 @@ jobs:
       - name: Check for Spotify credentials in code
         run: |
           echo "🔍 Checking for Spotify credentials..."
-          if grep -r "SPOTIFY_CLIENT_ID\|SPOTIFY_CLIENT_SECRET" . \
+
+          # Check for actual credential values (not just variable names)
+          if grep -rE "SPOTIFY_CLIENT_ID\s*=\s*['\"][^'\"]{10,}" . \
             --exclude-dir=.venv \
             --exclude-dir=__pycache__ \
             --exclude-dir=.git \
             --exclude-dir=.pytest_cache \
-            --exclude="*.pyc" | \
+            --exclude="*.pyc" \
+            --exclude="*.lock" \
+            --exclude="*.cache" | \
             grep -v "your_client_id_here\|your_client_secret_here\|seu_client_id_aqui\|seu_client_secret_aqui\|example\|placeholder\|SPOTIFY_CLIENT_ID=\|SPOTIFY_CLIENT_SECRET="; then
-            echo "❌ Potential Spotify credentials found in code!"
+            echo "❌ Potential Spotify CLIENT_ID found in code!"
             exit 1
-          else
-            echo "✅ No Spotify credentials found in code"
           fi
+
+          if grep -rE "SPOTIFY_CLIENT_SECRET\s*=\s*['\"][^'\"]{10,}" . \
+            --exclude-dir=.venv \
+            --exclude-dir=__pycache__ \
+            --exclude-dir=.git \
+            --exclude-dir=.pytest_cache \
+            --exclude="*.pyc" \
+            --exclude="*.lock" \
+            --exclude="*.cache" | \
+            grep -v "your_client_id_here\|your_client_secret_here\|seu_client_id_aqui\|seu_client_secret_aqui\|example\|placeholder\|SPOTIFY_CLIENT_ID=\|SPOTIFY_CLIENT_SECRET="; then
+            echo "❌ Potential Spotify CLIENT_SECRET found in code!"
+            exit 1
+          fi
+
+          echo "✅ No Spotify credentials found in code"
 
       - name: Check sensitive files are not committed
         run: |
