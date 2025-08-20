@@ -56,11 +56,42 @@ SPOTIFY_REDIRECT_URI=http://localhost:8888/callback
 
 ## 🎵 Configuração do Spotify
 
-1. Acesse [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
-2. Crie uma nova aplicação
-3. Copie o `Client ID` e `Client Secret`
-4. Adicione `http://localhost:8888/callback` nas URLs de redirecionamento
-5. **Importante:** Configure os seguintes escopos na sua aplicação:
+### 📋 **Tutorial Passo a Passo: Obtendo Credenciais do Spotify**
+
+#### **Passo 1: Acessar o Spotify Developer Dashboard**
+
+1. Acesse o [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
+2. Faça login com sua conta Spotify (ou crie uma se não tiver)
+
+#### **Passo 2: Criar uma Nova Aplicação**
+
+1. Clique no botão **"Create App"**
+2. Preencha os detalhes da aplicação:
+   - **Nome da App**: `Spotify MCP Server` (ou qualquer nome que preferir)
+   - **Descrição da App**: `Servidor MCP para controle de música do Spotify`
+   - **Website**: `http://localhost:8000` (opcional)
+   - **Redirect URI**: `http://localhost:8888/callback`
+   - **API/SDKs**: Selecione **"Web API"**
+3. Clique em **"Save"**
+
+#### **Passo 3: Obter Suas Credenciais**
+
+1. Após criar a app, você será redirecionado para o dashboard da sua aplicação
+2. Copie o **Client ID** (visível na página principal)
+3. Clique em **"Show Client Secret"** e copie o **Client Secret**
+4. **⚠️ Mantenha essas credenciais seguras! Nunca as compartilhe publicamente.**
+
+#### **Passo 4: Configurar Redirect URIs**
+
+1. No dashboard da sua app, vá em **"Edit Settings"**
+2. Em **"Redirect URIs"**, adicione: `http://localhost:8888/callback`
+3. Clique em **"Add"** e depois em **"Save"**
+
+#### **Passo 5: Configurar Escopos Necessários**
+
+1. No dashboard da sua app, vá em **"Edit Settings"**
+2. Em **"User Management"**, você verá a seção de escopos
+3. **Importante:** Os seguintes escopos serão solicitados durante a autenticação:
    - `user-read-playback-state` - Ler estado de reprodução
    - `user-modify-playback-state` - Controlar reprodução
    - `user-read-currently-playing` - Música atual
@@ -71,6 +102,31 @@ SPOTIFY_REDIRECT_URI=http://localhost:8888/callback
    - `user-follow-read` - Artistas seguidos
    - `user-read-email` - Email do usuário
    - `user-read-private` - Informações privadas
+
+#### **Passo 6: Atualizar Seu Arquivo .env**
+
+1. Copie o arquivo `env.example` para `.env`
+2. Substitua os valores placeholder pelas suas credenciais reais:
+
+```env
+SPOTIFY_CLIENT_ID=seu_client_id_real_aqui
+SPOTIFY_CLIENT_SECRET=seu_client_secret_real_aqui
+SPOTIFY_REDIRECT_URI=http://localhost:8888/callback
+```
+
+#### **Passo 7: Testar Sua Configuração**
+
+1. Inicie o servidor: `make dev`
+2. Na primeira vez que usar a API, você será redirecionado para o Spotify para autenticação
+3. Aceite as permissões solicitadas pelo Spotify
+4. Agora você deve conseguir controlar sua música do Spotify!
+
+### 🔐 **Dicas de Segurança**
+
+- **Nunca commite** seu arquivo `.env` no controle de versão
+- **Mantenha suas credenciais** privadas e seguras
+- **Use apps diferentes** para desenvolvimento e produção
+- **Rotacione regularmente** seu client secret se necessário
 
 ## 🚀 Uso
 
