@@ -1,11 +1,12 @@
 [project]
-name = "mcp-server"
+name = "spotify-mcp-server"
 version = "0.1.0"
 description = "MCP Server with Spotipy integration for music control via Spotify"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "Jadilson", email = "jadilson@example.com"}
 ]
 readme = "README.md"
+license = {text = "MIT"}
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.104.0",
