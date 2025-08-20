@@ -10,7 +10,7 @@ Use this section to tell people about which versions of your project are current
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within this project, please send an email to jadilson@example.com. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this project, please send an email to jadilson12@gmail.com. All security vulnerabilities will be promptly addressed.
 
 ### What to include in your report:
 
