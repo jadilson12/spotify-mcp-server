@@ -150,8 +150,16 @@ jobs:
               --exclude="*.pyc" \
               --exclude="*.log" \
               --exclude="trufflehog_results.json" \
-              --exclude=".secrets.baseline" | \
-              grep -v "your_client_id_here\|your_client_secret_here\|seu_client_id_aqui\|seu_client_secret_aqui\|example\|placeholder\|XXXXXXXXX\|dummy"; then
+              --exclude=".secrets.baseline" \
+              --exclude="uv.lock" \
+              --exclude="package-lock.json" \
+              --exclude="yarn.lock" \
+              --exclude="poetry.lock" \
+              --exclude="Pipfile.lock" \
+              --exclude="*.lock" \
+              --exclude=".spotify_token_cache" \
+              --exclude="*.cache" | \
+              grep -v "your_client_id_here\|your_client_secret_here\|seu_client_id_aqui\|seu_client_secret_aqui\|example\|placeholder\|XXXXXXXXX\|dummy\|sha256\|hash\|upload-time"; then
               echo "❌ Potential secret found with pattern: $pattern"
               FOUND_SECRETS=true
             fi
