@@ -1,5 +1,11 @@
 # Spotipy MCP Server
 
+[![CI/CD Pipeline](https://github.com/jadilson12/spotify-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/jadilson12/spotify-mcp-server/actions/workflows/ci.yml)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tests](https://img.shields.io/badge/tests-60%20passing-brightgreen)](https://github.com/jadilson12/spotify-mcp-server/actions)
+
 Servidor MCP (Model Context Protocol) com integração Spotipy para controle de música via Spotify.
 
 ## 🚀 Funcionalidades
@@ -24,8 +30,8 @@ Servidor MCP (Model Context Protocol) com integração Spotipy para controle de 
 1. **Clone o repositório:**
 
 ```bash
-git clone <seu-repositorio>
-cd mcp-server
+git clone https://github.com/jadilson12/spotify-mcp-server
+cd spotify-mcp-server
 ```
 
 2. **Instale as dependências:**

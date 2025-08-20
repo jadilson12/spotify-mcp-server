@@ -4,7 +4,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tests](https://img.shields.io/badge/tests-60%20passing-brightgreen)](https://github.com/your-username/mcp-server/actions)
+[![Tests](https://img.shields.io/badge/tests-60%20passing-brightgreen)](https://github.com/jadilson12/spotify-mcp-server/actions)
 
 MCP (Model Context Protocol) Server with Spotipy integration for music control via Spotify.
 
@@ -30,8 +30,8 @@ MCP (Model Context Protocol) Server with Spotipy integration for music control v
 1. **Clone the repository:**
 
 ```bash
-git clone <your-repository>
-cd mcp-server
+git clone https://github.com/jadilson12/spotify-mcp-server
+cd spotify-mcp-server
 ```
 
 2. **Install dependencies:**
